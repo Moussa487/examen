@@ -71,3 +71,7 @@ jobs:
           format: table
           exit-code: 1
           severity: CRITICAL,HIGH
+
+      # Push Docker image sur Docker Hub
+      - name: Push Docker image
+        run: docker push $DOCKER_IMAGE_NAME
