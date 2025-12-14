@@ -1,4 +1,4 @@
-name: CI/CD - democyber
+name: CI/CD - examen
 
 # Trigger the workflow on push or pull request to main
 on:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DOCKER_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/democyber:latest
+      DOCKER_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/examen:latest
 
     steps:
       # Checkout the code
@@ -55,8 +55,18 @@ jobs:
       # Test Docker image
       - name: Test Docker image locally
         run: |
-          docker run -d --name democyber-test -p 8000:8000 $DOCKER_IMAGE_NAME
+          docker run -d --name examen-test -p 8000:8000 $DOCKER_IMAGE_NAME
           sleep 10
           curl -f http://localhost:8000 || echo "App not responding"
-          docker stop democyber-test
-          docker rm democyber-test
+          docker stop examen-test
+          docker rm examen-test
+      #Tivy scan
+      - name: Build Docker image
+        run: docker build -t examen:latest .
+        - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+        image-ref: examen:latest
+        format: 'table'
+        exit-code: '1'
+        severity: 'CRITICAL,HIGH'
