@@ -1,26 +1,31 @@
 services:
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheus
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-    - "9090:9090"
-    networks:
-     - monitoring
+    app:
+      image: examen:latest
+      container_name: examen-app
+      ports:
+        - "8080:8080"
+    prometheus:
+      image: prom/prometheus
+      container_name: prometheus
+      volumes:
+        - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      ports:
+      - "9090:9090"
+      networks:
+      - monitoring
 
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    platform: linux/amd64   
-    ports:
-     - "3000:3000"
-    environment:
-     - GF_SECURITY_ADMIN_PASSWORD=admin
-    depends_on:
-     - prometheus
-    networks:
-     - monitoring
+    grafana:
+      image: grafana/grafana:latest
+      container_name: grafana
+      platform: linux/amd64   
+      ports:
+      - "3000:3000"
+      environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      depends_on:
+      - prometheus
+      networks:
+      - monitoring
 
 networks:
    monitoring:
