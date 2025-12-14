@@ -19,7 +19,7 @@ public class Examen {
         <html lang="en">
         <head>
             <meta charset="UTF-8">
-            <title>Demo Login - DevSecOps</title>
+            <title>Login Page</title>
             <style>
                 body {
                     font-family: Arial, sans-serif;
