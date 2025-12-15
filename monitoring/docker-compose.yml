@@ -1,9 +1,4 @@
 services:
-    app:
-      image: examen:latest
-      container_name: examen-app
-      ports:
-        - "8080:8080"
     prometheus:
       image: prom/prometheus
       container_name: prometheus
