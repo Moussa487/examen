@@ -63,7 +63,7 @@ public class Examen {
         </head>
         <body>
             <div class="login-box">
-                <h2>Demo Login</h2>
+                <h2>Login Page</h2>
                 <input type="text" placeholder="Username">
                 <input type="password" placeholder="Password">
                 <button onclick="login()">Login</button>
